@@ -1,15 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jose Paolo de Guzman | Senior Web Developer</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      color: #1e1e1e;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Header */
+    header {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #94a3b8;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0.75rem auto;
+      border: 3px solid #3b82f6;
+      display: block;
+    }
+
+    .icons {
+      margin-top: 0.5rem;
+    }
+
+    .icons a {
+      color: #94a3b8;
+      margin: 0 0.5rem;
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+
+    .icons a:hover {
+      color: #3b82f6;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: #3b82f6;
+      margin: 0 0.75rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: #60a5fa;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #0f172a;
+      border-left: 5px solid #3b82f6;
+      padding-left: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #334155;
+    }
+
+    /* Skills cards */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .skill-card {
+      background: #ffffff;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-card i {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-card .skill-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1e293b;
+    }
+
+    /* Projects list simpler */
+    .project-group {
+      margin-bottom: 2rem;
+    }
+
+    .project-group h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-group ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .project-group ul li {
+      background: #ffffff;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Contact & Footer */
+    #contact a {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
   <header>
+    <img src="profile.png" alt="Jose Paolo" class="profile-img" />
     <h1>Jose Paolo de Guzman</h1>
-    <p>Senior Web Developer | PHP, Laravel, Automation</p>
+    <p>Senior Web Developer | PHP · Laravel · Automation</p>
+    <div class="icons">
+      <a href="mailto:pao.fortress@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/paolo-dg-3a6963109?trk=contact-info" target="_blank"><i
+          class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+    </div>
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -18,62 +215,130 @@
     </nav>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m a full-stack developer with over 10 years of experience building enterprise systems, automations, and backend APIs for clients in Australia and the Philippines.</p>
-  </section>
+  <div class="container">
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Languages:</strong> PHP, JavaScript, Python, SQL</li>
-      <li><strong>Frameworks:</strong> Laravel, CodeIgniter, React Native</li>
-      <li><strong>Databases:</strong> MySQL, MSSQL, MongoDB</li>
-      <li><strong>Tools:</strong> Git, Postman, VS Code, Ubuntu</li>
-      <li><strong>Automation:</strong> Puppeteer, Playwright (Node.js, Python)</li>
-    </ul>
-  </section>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I’m a full-stack developer with over 10 years of experience building enterprise systems, automations, and
+        backend APIs for clients in Australia and the Philippines.</p>
+    </section>
 
-  <section id="projects">
-    <h2>Featured Projects</h2>
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-php"></i>
+          <div class="skill-name">PHP</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-js-square"></i>
+          <div class="skill-name">JavaScript</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-python"></i>
+          <div class="skill-name">Python</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-database"></i>
+          <div class="skill-name">SQL / MySQL</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-laravel"></i>
+          <div class="skill-name">Laravel</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-cubes"></i>
+          <div class="skill-name">CodeIgniter</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-cloud"></i>
+          <div class="skill-name">Cloud Vision / AWS</div>
+        </div>
+      </div>
+    </section>
 
-    <h3>Microsourcing (2020–Present)</h3>
-    <ul>
-      <li><strong>Medical Benchmarks Tool:</strong> PHP + Laravel, used in Australian practices</li>
-      <li><strong>Xero App:</strong> Migrated Xero & HubSpot data into MSSQL warehouse</li>
-      <li><strong>Process Automation:</strong> Scheduled task bots using NodeJS (Puppeteer)</li>
-    </ul>
+    <section id="automation">
+      <h2>Automation Tools</h2>
+      <div class="skills-grid">
+        <!-- n8n Card -->
+        <div class="skill-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg" alt="n8n"
+            style="width: 50px; height: 50px;" />
+          <div class="skill-name">n8n (Open Source Automation)</div>
+        </div>
 
-    <h3>Clearmind (2015–2020)</h3>
-    <ul>
-      <li><strong>MyTMC:</strong> Hospital backend system (Laravel + MSSQL)</li>
-      <li><strong>E-KYC:</strong> Customer verification with AWS Rekognition & Google Cloud Vision</li>
-      <li><strong>Globe Telecom – Sales Force Automation:</strong> Field sales management system (CodeIgniter)</li>
-      <li><strong>Go Salad – POS Reporting:</strong> Reporting tool for point-of-sale data (CodeIgniter)</li>
-      <li><strong>Apollo Plus:</strong> Pharmaceutical ordering and inventory (Laravel)</li>
-      <li><strong>USSC Rewards:</strong> Inventory with API integration to USSC (Laravel)</li>
-      <li><strong>USSC Branch Checklist:</strong> Branch survey and mobile backend (Laravel)</li>
-      <li><strong>Pay1st:</strong> Platform for digital money like GCash and PayMaya (Laravel)</li>
-      <li><strong>USSC Branch Locator:</strong> Web tool used by USSC support (Laravel)</li>
-      <li><strong>ABS-CBN Weather App:</strong> Weather visualization using Laravel + AngularJS</li>
-    </ul>
+        <!-- Power Automate Card -->
+        <div class="skill-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Power_Automate.svg"
+            alt="Power Automate" style="width: 50px; height: 50px;" />
+          <div class="skill-name">Microsoft Power Automate</div>
+        </div>
 
-    <h3>Freelance Projects</h3>
-    <ul>
-      <li><strong>Pasabuy App:</strong> Laravel backend and React Native frontend for delivery service</li>
-      <li><strong>Philconstruct:</strong> Event registration and booth tracking app with API integration</li>
-    </ul>
-  </section>
+        <!-- Puppeteer -->
+        <div class="skill-card">
+          <i class="fas fa-robot"></i>
+          <div class="skill-name">Puppeteer (Node.js)</div>
+        </div>
 
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:pao.fortress@gmail.com">pao.fortress@gmail.com</a></p>
-    <!-- <p>GitHub: <a href="https://github.com/juancruz" target="_blank">juancruz</a></p> -->
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/paolo-dg-3a6963109?trk=contact-info" target="_blank">Pao DG</a></p>
-  </section>
+        <!-- Playwright -->
+        <div class="skill-card">
+          <i class="fas fa-robot"></i>
+          <div class="skill-name">Playwright (Node.js / Python)</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+
+      <div class="project-group">
+        <h3>Microsourcing (2020–Present)</h3>
+        <ul>
+          <li><strong>Medical Benchmarks Tool:</strong> Laravel app for Australian practices</li>
+          <li><strong>Xero App:</strong> Data warehouse migration from Xero & HubSpot</li>
+          <li><strong>Automation Bots:</strong> Headless Puppeteer bots via NodeJS</li>
+          <li><strong>AI Invoice Workflow:</strong> Power Automate + AI for parsing & storing PDF invoice data</li>
+        </ul>
+      </div>
+
+      <div class="project-group">
+        <h3>Clearmind (2015–2020)</h3>
+        <ul>
+          <li><strong>MyTMC:</strong> Hospital backend (Laravel + MSSQL)</li>
+          <li><strong>E-KYC:</strong> Verification with AWS Rekognition & Google Vision</li>
+          <li><strong>Sales Force Automation:</strong> Globe Telecom (CodeIgniter)</li>
+          <li><strong>POS Reporting:</strong> Go Salad Analytics (CodeIgniter)</li>
+          <li><strong>Inventory Tools:</strong> Apollo Plus, USSC Rewards, Pay1st (Laravel)</li>
+          <li><strong>Weather App:</strong> ABS‑CBN weather system (Laravel + AngularJS)</li>
+        </ul>
+      </div>
+
+      <div class="project-group">
+        <h3>Freelance Projects</h3>
+        <ul>
+          <li><strong>Pasabuy App:</strong> Laravel backend, React Native frontend</li>
+          <li><strong>Philconstruct:</strong> Booth registration & tracking API</li>
+          <li><strong>Social Media Automation:</strong> n8n + Google Sheets workflow for content approvals and posting</li>
+          <li><strong>AI Email Task Extractor:</strong> n8n + OpenAI workflow that scans incoming emails and adds tasks to a Google Sheet if detected.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:pao.fortress@gmail.com">pao.fortress@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/paolo-dg-3a6963109?trk=contact-info" target="_blank">Pao DG</a>
+      </p>
+      <!-- optionally add phone, address, GitHub etc. -->
+    </section>
+
+  </div>
 
   <footer>
     <p>&copy; 2025 Jose Paolo de Guzman. All rights reserved.</p>
   </footer>
+
 </body>
+
 </html>
