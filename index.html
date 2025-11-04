@@ -1,344 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Jose Paolo de Guzman | Senior Web Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
-    /* Reset & base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root{
+      --bg:#0b0b0d;              /* main background */
+      --panel:#0f1113;           /* main content panel */
+      --muted:#9aa4af;           /* secondary text */
+      --white:#e6eef6;          /* main text */
+      --accent:#7df0ff;         /* neon accent (cyan) */
+      --accent-2:#9b8cff;       /* secondary neon (subtle purple) */
+      --glass: rgba(255,255,255,0.03);
+      --card: rgba(255,255,255,0.02);
+      --shadow: rgba(5,8,12,0.8);
+      --sidebar-w: 300px;
+      --radius: 12px;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f5f7fa;
-      color: #1e1e1e;
-      line-height: 1.6;
+    /* Reset */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html,body { height:100%; }
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(125,240,255,0.03), transparent 6%),
+                  radial-gradient(900px 500px at 90% 90%, rgba(155,140,255,0.03), transparent 8%),
+                  var(--bg);
+      color:var(--white);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+      overflow: hidden; /* keep split layout tidy */
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    /* Header */
-    header {
-      background: #0f172a;
-      color: #e2e8f0;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.25rem;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #94a3b8;
-    }
-
-    .profile-img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0.75rem auto;
-      border: 3px solid #3b82f6;
-      display: block;
-    }
-
-    .icons {
-      margin-top: 0.5rem;
-    }
-
-    .icons a {
-      color: #94a3b8;
-      margin: 0 0.5rem;
-      font-size: 1.3rem;
-      transition: color 0.3s;
-    }
-
-    .icons a:hover {
-      color: #3b82f6;
-    }
-
-    nav {
-      margin-top: 1rem;
-    }
-
-    nav a {
-      color: #3b82f6;
-      margin: 0 0.75rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    nav a:hover {
-      color: #60a5fa;
-    }
-
-    /* Sections */
-    section {
-      margin-bottom: 3.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-      color: #0f172a;
-      border-left: 5px solid #3b82f6;
-      padding-left: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: #334155;
-    }
-
-    /* Skills cards */
-    .skills-grid {
+    /* Split layout */
+    .app {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      height: 100vh;
     }
 
+    /* Sidebar */
+    aside.sidebar {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding: 28px 20px;
+      border-right: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:8px;
+    }
+
+    .avatar {
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      overflow:hidden;
+      flex-shrink:0;
+      border:1px solid rgba(255,255,255,0.06);
+      display:inline-block;
+    }
+    .avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .brand h1 {
+      font-family: Orbitron, Inter, sans-serif;
+      font-size:16px;
+      letter-spacing:0.6px;
+      color:var(--white);
+      margin:0;
+      line-height:1;
+    }
+    .brand p {
+      margin:0;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* neon accent bar */
+    .accent-bar {
+      width:4px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+      border-radius: 8px;
+      height: 72px;
+      align-self:flex-start;
+      box-shadow: 0 6px 20px rgba(125,240,255,0.06), 0 2px 8px rgba(155,140,255,0.03);
+    }
+
+    /* nav */
+    nav.main-nav {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:6px;
+    }
+    nav a {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      color:var(--muted);
+      border-radius:10px;
+      font-weight:600;
+      font-size:14px;
+      transition: all 180ms ease;
+    }
+    nav a i { width:18px; text-align:center; color:var(--accent); font-size:12px; opacity:0.9; }
+    nav a:hover { color:var(--white); background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); transform:translateX(6px); }
+    nav a.active {
+      color:var(--white);
+      background: linear-gradient(90deg, rgba(125,240,255,0.04), rgba(155,140,255,0.02));
+      box-shadow: 0 6px 30px rgba(125,240,255,0.02);
+      transform:none;
+    }
+
+    /* compact info + links */
+    .sidebar-footer {
+      margin-top:auto;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .socials {
+      display:flex;
+      gap:10px;
+    }
+    .socials a {
+      width:36px;
+      height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:9px;
+      background: var(--card);
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+      transition: transform 140ms ease, color 140ms;
+    }
+    .socials a:hover { transform: translateY(-4px); color:var(--accent); box-shadow: 0 8px 24px rgba(125,240,255,0.03); }
+
+    .cta {
+      display:flex;
+      gap:8px;
+      align-items:center;
+      padding:10px;
+      border-radius:10px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.02);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .cta strong{ color:var(--white); font-weight:700; }
+
+    /* Main content area */
+    main.content {
+      padding: 36px 48px;
+      overflow-y: auto;
+      position:relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.002), transparent 40%), var(--panel);
+    }
+
+    /* content wrapper width */
+    .content-inner {
+      max-width:980px;
+      margin:0 auto 80px auto;
+    }
+
+    /* section container / cards */
+    section.card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border-radius: var(--radius);
+      padding:22px;
+      margin-bottom:26px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(2,4,8,0.5);
+      transform-origin: left center;
+      transition: transform .45s cubic-bezier(.2,.9,.2,1), opacity .45s;
+      opacity: 0;
+      transform: translateY(18px) scale(.995);
+    }
+
+    section.card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    section.card h2 {
+      font-family: Orbitron, Inter, sans-serif;
+      font-size:20px;
+      margin-bottom:8px;
+      color:var(--white);
+      letter-spacing:0.6px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    /* small neon title underline */
+    section.card h2:after {
+      content:"";
+      display:inline-block;
+      height:6px;
+      width:60px;
+      border-radius:4px;
+      margin-left:12px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity:0.16;
+    }
+
+    section.card p { color:var(--muted); font-size:15px; margin-top:6px; }
+
+    /* Skills grid (cards) */
+    .skills-grid {
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap:12px;
+    }
     .skill-card {
-      background: #ffffff;
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      padding:14px;
+      border-radius:10px;
+      border: 1px solid rgba(255,255,255,0.02);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .skill-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,10,0.7); }
+    .skill-card i, .skill-card img { font-size:20px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:8px; color:var(--accent); background: linear-gradient(180deg, rgba(125,240,255,0.025), rgba(155,140,255,0.02)); border:1px solid rgba(255,255,255,0.02); }
+    .skill-name { font-weight:700; color:var(--white); font-size:14px; }
+
+    /* project lists */
+    .project-group { margin-top:12px; }
+    .project-group h3 { margin:0 0 8px 0; font-size:15px; color:var(--white); }
+    .project-group ul { margin-left:16px; color:var(--muted); }
+    .project-group li { margin-bottom:8px; }
+
+    .integration-icons { margin-top:10px; display:flex; gap:8px; align-items:center; }
+    .integration-icons img { height:32px; opacity:0.95; filter:grayscale(0.25) contrast(0.9); border-radius:6px; background: rgba(255,255,255,0.01); padding:4px; }
+
+    /* codes / inline badges */
+    code { background: rgba(255,255,255,0.02); padding:4px 8px; border-radius:6px; color:var(--white); font-weight:600; font-size:13px; }
+
+    /* Contact */
+    #contact a { color:var(--accent); font-weight:700; text-decoration:none; }
+
+    footer.small {
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:18px;
     }
 
-    .skill-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    /* Responsive */
+    @media (max-width: 900px){
+      :root { --sidebar-w: 86px; } /* narrower side on tablet */
+      .brand h1 { display:none; }
+      .brand p { display:none; }
+      nav a span { display:none; } /* hide link text to save space */
+      nav a { justify-content:center; padding:10px; }
+      aside.sidebar { padding:16px 10px; gap:10px; }
+      .accent-bar { display:none; }
+      .cta { display:none; }
     }
 
-    .skill-card i {
-      font-size: 2.5rem;
-      color: #3b82f6;
-      margin-bottom: 0.75rem;
-    }
-
-    .skill-card .skill-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #1e293b;
-    }
-
-    /* Projects list simpler */
-    .project-group {
-      margin-bottom: 2rem;
-    }
-
-    .project-group h3 {
-      font-size: 1.5rem;
-      color: #1e293b;
-      margin-bottom: 0.75rem;
-    }
-
-    .project-group ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .project-group ul li {
-      background: #ffffff;
-      margin-bottom: 0.5rem;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Contact & Footer */
-    #contact a {
-      color: #3b82f6;
-      font-weight: 600;
-    }
-
-    footer {
-      background: #0f172a;
-      color: #94a3b8;
-      text-align: center;
-      padding: 1.5rem 1rem;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.5rem;
+    @media (max-width:700px){
+      .app { grid-template-columns: 1fr; }   /* collapse to single column */
+      aside.sidebar {
+        position: fixed;
+        left:0; right:0;
+        top:0;
+        height:64px;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        padding:10px 14px;
+        z-index:40;
+        border-right:none;
+        border-bottom:1px solid rgba(255,255,255,0.03);
       }
-
-      header p {
-        font-size: 1.1rem;
-      }
+      main.content { padding: 84px 20px 48px 20px; overflow-y:auto; height:100vh; }
+      .sidebar-footer { display:none; }
+      .content-inner { padding-top:6px; }
+      section.card { margin-bottom:18px; }
     }
+
+    /* small helper for subtle separators */
+    .muted-line { height:1px; background:rgba(255,255,255,0.02); margin:12px 0; border-radius:6px; }
+
   </style>
 </head>
-
 <body>
+  <div class="app">
 
-  <header>
-    <img src="profile.png" alt="Jose Paolo" class="profile-img" />
-    <h1>Jose Paolo de Guzman</h1>
-    <p>Senior Web Developer | PHP · Laravel · Automation</p>
-    <div class="icons">
-      <a href="mailto:pao.fortress@gmail.com"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/paolo-dg-3a6963109?trk=contact-info" target="_blank"><i
-          class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fab fa-github"></i></a>
-    </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <div class="container">
-
-    <section id="about">
-      <h2>About Me</h2>
-      <p>I’m a full-stack developer with over 10 years of experience building enterprise systems, automations, and
-        backend APIs for clients in Australia and the Philippines.</p>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <i class="fab fa-php"></i>
-          <div class="skill-name">PHP</div>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-js-square"></i>
-          <div class="skill-name">JavaScript</div>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-python"></i>
-          <div class="skill-name">Python</div>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-database"></i>
-          <div class="skill-name">SQL / MySQL</div>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-laravel"></i>
-          <div class="skill-name">Laravel</div>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-cubes"></i>
-          <div class="skill-name">CodeIgniter</div>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-cloud"></i>
-          <div class="skill-name">Cloud Vision / AWS</div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-label="Main sidebar">
+      <div class="brand" title="Jose Paolo de Guzman">
+        <div class="avatar"><img src="profile.png" alt="Jose Paolo"></div>
+        <div>
+          <h1>Jose Paolo</h1>
+          <p>Senior Web Developer</p>
         </div>
       </div>
-    </section>
 
-    <section id="automation">
-      <h2>Automation Tools</h2>
-      <div class="skills-grid">
-        <!-- n8n Card -->
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg" alt="n8n"
-            style="width: 50px; height: 50px;" />
-          <div class="skill-name">n8n (Open Source Automation)</div>
-        </div>
-
-        <!-- Power Automate Card -->
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Power_Automate.svg"
-            alt="Power Automate" style="width: 50px; height: 50px;" />
-          <div class="skill-name">Microsoft Power Automate</div>
-        </div>
-
-        <!-- Puppeteer -->
-        <div class="skill-card">
-          <i class="fas fa-robot"></i>
-          <div class="skill-name">Puppeteer (Node.js)</div>
-        </div>
-
-        <!-- Playwright -->
-        <div class="skill-card">
-          <i class="fas fa-robot"></i>
-          <div class="skill-name">Playwright (Node.js / Python)</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Featured Projects</h2>
-
-      <div class="project-group">
-        <h3>Microsourcing (2020–Present)</h3>
-        <ul>
-          <li><strong>Medical Benchmarks Tool:</strong> Laravel app for Australian practices</li>
-          <li><strong>Xero App:</strong> Data warehouse migration from Xero & HubSpot</li>
-          <li><strong>Automation Bots:</strong> Headless Puppeteer bots via NodeJS</li>
-          <li><strong>AI Invoice Workflow:</strong> Power Automate + AI for parsing & storing PDF invoice data</li>
-          <li><strong>Client Intake AI Agent:</strong> Internal AI agent for lead intake, integrated with Power Automate to validate Client Code duplicates and store data in the warehouse</li>
-        </ul>
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <div class="accent-bar" aria-hidden="true"></div>
+        <nav class="main-nav" id="sidebarNav" aria-label="Primary navigation">
+          <a href="#about" class="nav-link active"><i class="fas fa-user"></i><span>About</span></a>
+          <a href="#skills" class="nav-link"><i class="fas fa-code"></i><span>Skills</span></a>
+          <a href="#automation" class="nav-link"><i class="fas fa-robot"></i><span>Automation</span></a>
+          <a href="#projects" class="nav-link"><i class="fas fa-briefcase"></i><span>Projects</span></a>
+          <a href="#workflows" class="nav-link"><i class="fas fa-project-diagram"></i><span>Workflows</span></a>
+          <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i><span>Contact</span></a>
+        </nav>
       </div>
 
-      <div class="project-group">
-        <h3>Clearmind (2015–2020)</h3>
-        <ul>
-          <li><strong>MyTMC:</strong> Hospital backend (Laravel + MSSQL)</li>
-          <li><strong>E-KYC:</strong> Verification with AWS Rekognition & Google Vision</li>
-          <li><strong>Sales Force Automation:</strong> Globe Telecom (CodeIgniter)</li>
-          <li><strong>POS Reporting:</strong> Go Salad Analytics (CodeIgniter)</li>
-          <li><strong>Inventory Tools:</strong> Apollo Plus, USSC Rewards, Pay1st (Laravel)</li>
-          <li><strong>Weather App:</strong> ABS‑CBN weather system (Laravel + AngularJS)</li>
-        </ul>
+      <div class="sidebar-footer">
+        <div class="socials" aria-hidden="false">
+          <a href="mailto:pao.fortress@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/paolo-dg-3a6963109" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="muted-line" role="presentation"></div>
+
+        <div class="cta" title="Short intro">
+          <div style="flex:1">
+            <div style="font-size:13px; color:var(--muted)">Location</div>
+            <div style="font-weight:700; color:var(--white); font-size:13px">Philippines</div>
+          </div>
+        </div>
       </div>
+    </aside>
 
-      <div class="project-group">
-        <h3>Freelance Projects</h3>
-        <ul>
-          <li><strong>Pasabuy App:</strong> Laravel backend, React Native frontend</li>
-          <li><strong>Philconstruct:</strong> Booth registration & tracking API</li>
-          <li><strong>Social Media Automation:</strong> n8n + Google Sheets workflow for content approvals and posting</li>
-          <li><strong>AI Email Task Extractor:</strong> n8n + OpenAI workflow that scans incoming emails and adds tasks to a Google Sheet if detected.</li>
-        </ul>
+    <!-- MAIN CONTENT -->
+    <main class="content" id="mainContent" tabindex="0">
+      <div class="content-inner">
+
+        <!-- ABOUT -->
+        <section id="about" class="card">
+          <h2>About Me</h2>
+          <p>I’m a full-stack developer with over 10 years of experience building enterprise systems, automations, and backend APIs for clients in Australia and the Philippines.</p>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="card">
+          <h2>Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-card"><i class="fab fa-php" aria-hidden="true"></i><div><div class="skill-name">PHP</div></div></div>
+            <div class="skill-card"><i class="fab fa-js-square" aria-hidden="true"></i><div><div class="skill-name">JavaScript</div></div></div>
+            <div class="skill-card"><i class="fab fa-python" aria-hidden="true"></i><div><div class="skill-name">Python</div></div></div>
+            <div class="skill-card"><i class="fas fa-database" aria-hidden="true"></i><div><div class="skill-name">SQL / MySQL</div></div></div>
+            <div class="skill-card"><i class="fab fa-laravel" aria-hidden="true"></i><div><div class="skill-name">Laravel</div></div></div>
+            <div class="skill-card"><i class="fas fa-cubes" aria-hidden="true"></i><div><div class="skill-name">CodeIgniter</div></div></div>
+            <div class="skill-card"><i class="fas fa-cloud" aria-hidden="true"></i><div><div class="skill-name">Cloud Vision / AWS</div></div></div>
+          </div>
+        </section>
+
+        <!-- AUTOMATION -->
+        <section id="automation" class="card">
+          <h2>Automation Tools</h2>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg" alt="n8n">
+              <div><div class="skill-name">n8n (Open Source Automation)</div></div>
+            </div>
+            <div class="skill-card">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Power_Automate.svg" alt="Power Automate">
+              <div><div class="skill-name">Microsoft Power Automate</div></div>
+            </div>
+            <div class="skill-card"><i class="fas fa-robot" aria-hidden="true"></i><div><div class="skill-name">Puppeteer (Node.js)</div></div></div>
+            <div class="skill-card"><i class="fas fa-robot" aria-hidden="true"></i><div><div class="skill-name">Playwright (Node.js / Python)</div></div></div>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="card">
+          <h2>Featured Projects</h2>
+
+          <div class="project-group">
+            <h3>Microsourcing (2020–Present)</h3>
+            <ul>
+              <li><strong>Medical Benchmarks Tool:</strong> Laravel app for Australian practices</li>
+              <li><strong>Xero App:</strong> Data warehouse migration from Xero & HubSpot</li>
+              <li><strong>Automation Bots:</strong> Headless Puppeteer bots via NodeJS</li>
+              <li><strong>AI Invoice Workflow:</strong> Power Automate + AI for parsing & storing PDF invoice data</li>
+              <li><strong>Client Intake AI Agent:</strong> Internal AI agent for lead intake integrated with Power Automate</li>
+            </ul>
+          </div>
+
+          <div class="project-group">
+            <h3>Clearmind (2015–2020)</h3>
+            <ul>
+              <li><strong>MyTMC:</strong> Hospital backend (Laravel + MSSQL)</li>
+              <li><strong>E-KYC:</strong> Verification with AWS Rekognition & Google Vision</li>
+              <li><strong>Sales Force Automation:</strong> Globe Telecom (CodeIgniter)</li>
+              <li><strong>POS Reporting:</strong> Go Salad Analytics (CodeIgniter)</li>
+              <li><strong>Inventory Tools:</strong> Apollo Plus, USSC Rewards, Pay1st (Laravel)</li>
+              <li><strong>Weather App:</strong> ABS-CBN weather system (Laravel + AngularJS)</li>
+            </ul>
+          </div>
+
+          <div class="project-group">
+            <h3>Freelance Projects</h3>
+            <ul>
+              <li><strong>Pasabuy App:</strong> Laravel backend, React Native frontend</li>
+              <li><strong>Philconstruct:</strong> Booth registration & tracking API</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- WORKFLOWS -->
+        <section id="workflows" class="card">
+          <h2>Automation Workflows</h2>
+
+          <div class="project-group">
+            <h3>Client Onboarding (n8n + QuickBooks + Airtable + Slack)</h3>
+            <p>This workflow automates the client onboarding process end-to-end:</p>
+            <ul style="list-style: circle; margin-left: 1.2rem;">
+              <li>Triggered by HubSpot Webhook on new lead submission</li>
+              <li>Creates a QuickBooks Customer record</li>
+              <li>Generates a client folder in Google Drive</li>
+              <li>Logs details into Airtable (“Client Onboarding Log”)</li>
+              <li>Sends notification to Slack <code>#all-demo</code> channel</li>
+              <li>Error handling: Sends Slack alerts + logs errors in Airtable</li>
+            </ul>
+            <p><strong>Tech Stack:</strong> n8n, QuickBooks API, Google Drive API, Airtable API, Slack API</p>
+            <div class="integration-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg" alt="n8n">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Intuit_QuickBooks_logo_2022.svg" alt="QuickBooks">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Airtable_Logo.svg" alt="Airtable">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Slack_Technologies_Logo.svg" alt="Slack">
+            </div>
+
+            <p style="margin-top:0.5rem;">
+              <a href="https://airtable.com/appsy11UkQJwwc7n5" target="_blank" style="color:var(--accent); font-weight:700;">View Airtable Log</a> ·
+              <a href="https://drive.google.com/drive/folders/1VsxMP7lFQX88mVesc0a6ZAf3QJnHvqZv" target="_blank" style="color:var(--accent); font-weight:700;">View Google Drive Folder</a>
+            </p>
+          </div>
+
+          <div class="project-group">
+            <h3>AI Invoice Workflow (Power Automate + AI Builder)</h3>
+            <p>This workflow automates invoice extraction and data processing from client emails.</p>
+            <ul style="list-style: circle; margin-left: 1.2rem;">
+              <li>Triggered when a new email arrives in the shared client inbox</li>
+              <li>Checks if the email contains a valid invoice PDF attachment</li>
+              <li>Uses <strong>AI Builder</strong> to analyze and extract structured invoice data:
+                <ul style="margin-left: 1.2rem; list-style: square;">
+                  <li>Invoice number</li>
+                  <li>Invoice date</li>
+                  <li>Vendor name</li>
+                  <li>Total amount</li>
+                  <li>Line item details</li>
+                </ul>
+              </li>
+              <li>Validates extracted data for completeness and consistency</li>
+              <li>Pushes parsed invoice data into the <strong>Data Warehouse</strong> for reporting and financial reconciliation</li>
+              <li>Logs each processed file and result for audit and tracking</li>
+            </ul>
+            <p><strong>Tech Stack:</strong> Microsoft Power Automate, AI Builder, Outlook, SQL Data Warehouse, Power BI</p>
+            <div class="integration-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Power_Automate.svg" alt="Power Automate">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Microsoft_Office_Outlook_%282019–present%29.svg" alt="Outlook">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Microsoft_AI_Builder_Logo.svg" alt="AI Builder">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Database_icon.svg" alt="Data Warehouse">
+            </div>
+          </div>
+
+          <div class="project-group">
+            <h3>AI Email Task Extractor (Power Automate + AI Builder + Microsoft Teams)</h3>
+            <p>This workflow uses AI to identify and extract actionable tasks from incoming emails and automatically notify the team.</p>
+            <ul style="list-style: circle; margin-left: 1.2rem;">
+              <li>Triggered when a new email arrives in the shared or monitored inbox</li>
+              <li>AI Builder model analyzes the email content to determine if it contains a task</li>
+              <li>If the email <strong>is a task</strong>:
+                <ul style="margin-left: 1.2rem; list-style: square;">
+                  <li>Extracts <strong>Task Name</strong> and <strong>Task Category</strong></li>
+                  <li>Detects <strong>Target Date</strong> if mentioned</li>
+                  <li>Generates a concise <strong>Task Description</strong> based on the email body</li>
+                  <li>Logs all extracted task details into the shared <strong>Task List File</strong> (Excel, SharePoint, or Data Warehouse)</li>
+                  <li>Sends a <strong>notification to Microsoft Teams</strong> announcing the new task</li>
+                </ul>
+              </li>
+              <li>If the email <strong>does not contain a task</strong>, the workflow ignores it and performs no action</li>
+              <li>Includes error handling to log any failed extractions or Teams notifications</li>
+            </ul>
+            <p><strong>Tech Stack:</strong> Microsoft Power Automate, AI Builder, Outlook, Microsoft Teams, Excel / SharePoint</p>
+            <div class="integration-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_Power_Automate.svg" alt="Power Automate">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Microsoft_Office_Outlook_%282019–present%29.svg" alt="Outlook">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Microsoft_AI_Builder_Logo.svg" alt="AI Builder">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_Teams_%282019–present%29.svg" alt="Microsoft Teams">
+            </div>
+
+            <p style="margin-top:0.5rem;">
+              <a href="#" style="color:var(--accent); font-weight:700;">View Workflow Summary (coming soon)</a>
+            </p>
+          </div>
+
+          <div class="project-group">
+            <h3>FB Scheduled Post (n8n + Gmail + Google Sheets + Facebook Graph API)</h3>
+            <p>This workflow automates the process of posting approved social media content to a Facebook Page after email approval.</p>
+            <ul style="list-style: circle; margin-left: 1.2rem;">
+              <li>Triggered when a content approval email is received in Gmail with a specific subject</li>
+              <li>Parses the email content and extracts a <strong>Post Token</strong> to identify the related record in Google Sheets</li>
+              <li>Checks if the email body contains the keyword <strong>“approved”</strong></li>
+              <li>If approved:
+                <ul style="margin-left: 1.2rem; list-style: square;">
+                  <li>Fetches the corresponding post details (message, image URL, post date) from the Google Sheet</li>
+                  <li>Schedules an image post to the linked Facebook Page using the <strong>Facebook Graph API</strong></li>
+                  <li>Updates the post’s <strong>Status</strong> column in Google Sheets to “Approved”</li>
+                </ul>
+              </li>
+              <li>If the post is not approved, the workflow stops and performs no action</li>
+              <li>Maintains complete audit tracking within Google Sheets</li>
+            </ul>
+            <p><strong>Tech Stack:</strong> n8n, Gmail API, Google Sheets API, Facebook Graph API</p>
+            <div class="integration-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg" alt="n8n">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Gmail_Icon.svg" alt="Gmail">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Facebook_icon.svg" alt="Facebook">
+            </div>
+          </div>
+
+          <div class="project-group">
+            <h3>AI Social Media Content Creator (n8n + Google Gemini + OpenWeather + Google Sheets + Facebook Graph API)</h3>
+            <p>This workflow automatically generates and posts daily AI-created social media content based on current weather data and inspirational quotes.</p>
+            <ul style="list-style: circle; margin-left: 1.2rem;">
+              <li>Runs automatically every morning using a <strong>Schedule Trigger</strong></li>
+              <li><strong>AI Agent (Google Gemini)</strong> generates a unique 5-word inspirational quote each day, ensuring it’s never repeated or too similar to previous entries</li>
+              <li>Stores each new quote in <strong>Google Sheets</strong> with the date and word count</li>
+              <li>Fetches real-time weather data from <strong>OpenWeatherMap</strong> for the target location (e.g., Manila, PH)</li>
+              <li>Uses AI to:
+                <ul style="margin-left: 1.2rem; list-style: square;">
+                  <li>Retrieve or generate a weather-relevant background image</li>
+                  <li>Create a 17-word weather forecast caption suitable for social posting</li>
+                </ul>
+              </li>
+              <li>Combines the quote, weather info, and image into a composite post design using the <strong>Imejis Design API</strong></li>
+              <li>Automatically uploads the generated image and caption to a <strong>Facebook Page</strong> via the <strong>Facebook Graph API</strong></li>
+              <li>Logs every generated quote and image reference in <strong>Google Sheets</strong> for tracking and reuse prevention</li>
+            </ul>
+            <p><strong>Tech Stack:</strong> n8n, Google Gemini (AI), OpenWeatherMap API, Google Sheets API, Imejis API, Facebook Graph API</p>
+            <div class="integration-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/N8n-logo-new.svg" alt="n8n">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Google_Gemini_logo.svg" alt="Google Gemini">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/OpenWeather_Logo.svg" alt="OpenWeather">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Facebook_icon.svg" alt="Facebook">
+            </div>
+          </div>
+
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="card">
+          <h2>Contact Me</h2>
+          <p>Email: <a href="mailto:pao.fortress@gmail.com">pao.fortress@gmail.com</a></p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/paolo-dg-3a6963109?trk=contact-info" target="_blank">Pao DG</a></p>
+          <div class="small muted" style="margin-top:12px; color:var(--muted); font-size:13px;">
+            Available for contracts, long-term engagements, and technical leadership roles.
+          </div>
+        </section>
+
+        <div class="footer small">&copy; 2025 Jose Paolo de Guzman. All Rights Reserved.</div>
       </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:pao.fortress@gmail.com">pao.fortress@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/paolo-dg-3a6963109?trk=contact-info" target="_blank">Pao DG</a>
-      </p>
-      <!-- optionally add phone, address, GitHub etc. -->
-    </section>
-
+    </main>
   </div>
 
-  <footer>
-    <p>&copy; 2025 Jose Paolo de Guzman. All rights reserved.</p>
-  </footer>
+  <script>
+    // Smooth reveal on scroll + nav highlighting
+    (function(){
+      const sections = document.querySelectorAll('main.content section.card');
+      const options = { root: document.querySelector('main.content'), threshold: 0.18 };
 
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, options);
+
+      sections.forEach(s => observer.observe(s));
+
+      // Nav highlight (based on scroll)
+      const navLinks = document.querySelectorAll('.main-nav a');
+      const main = document.querySelector('main.content');
+
+      function setActiveLink() {
+        const offset = main.scrollTop + 120;
+        let currentId = 'about';
+        sections.forEach(sec => {
+          if (sec.offsetTop <= offset) currentId = sec.id;
+        });
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === ('#' + currentId));
+        });
+      }
+      // initial
+      setActiveLink();
+      main.addEventListener('scroll', setActiveLink);
+
+      // click nav: scroll into view inside main.content
+      navLinks.forEach(link=>{
+        link.addEventListener('click', (ev)=>{
+          ev.preventDefault();
+          const targetId = link.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if (!target) return;
+          // scroll main.content to target
+          const top = target.offsetTop - 12; // small offset
+          document.querySelector('main.content').scrollTo({ top, behavior:'smooth' });
+          // close mobile fixed header state if any (not used here)
+        });
+      });
+
+      // Accessibility: allow arrow keys to jump sections
+      document.addEventListener('keydown', (e)=>{
+        if (['ArrowDown','ArrowUp','PageDown','PageUp'].includes(e.key)) {
+          e.preventDefault();
+          const visible = Array.from(sections).findIndex(s => s.classList.contains('visible'));
+          let idx = visible;
+          if (e.key === 'ArrowDown' || e.key === 'PageDown') idx = Math.min(sections.length - 1, visible + 1);
+          if (e.key === 'ArrowUp' || e.key === 'PageUp') idx = Math.max(0, visible - 1);
+          if (idx >= 0 && sections[idx]) document.querySelector('main.content').scrollTo({ top: sections[idx].offsetTop - 12, behavior:'smooth' });
+        }
+      });
+
+    })();
+  </script>
 </body>
-
 </html>
