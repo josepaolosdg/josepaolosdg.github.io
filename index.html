@@ -766,7 +766,7 @@
                     <h2>Featured Projects</h2>
 
                     <div class="project-group">
-                        <h3>Microsourcing (2020–Present)</h3>
+                        <h3>Microsourcing (2020–<span id="current-year" style="display: contents;">Present</span>)</h3>
                         <p class="project-desc">
                             A suite of enterprise tools built for an Australian accounting firm, including medical
                             benchmarks,
@@ -1165,6 +1165,12 @@
                     if (idx >= 0 && sections[idx]) document.querySelector('main.content').scrollTo({ top: sections[idx].offsetTop - 12, behavior: 'smooth' });
                 }
             });
+
+            // Get the current year
+            const currentYear = new Date().getFullYear();
+
+            // Replace the "Present" text with the current year
+            document.getElementById('current-year').textContent = currentYear;
 
         })();
     </script>
